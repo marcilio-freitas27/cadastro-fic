@@ -18,12 +18,15 @@ public class Main {
      * @param args the command line arguments
      */
     
+    /* criando constantes para inserir dados nas listas e que serão exibidos*/
     public static final List<Professor> professores = new ArrayList<Professor>();
     public static final List<Turma> turmas = new ArrayList<Turma>();
     public static final List<Curso> cursos = new ArrayList<Curso>();
+    /* entrada de dados com scanner*/
     public static Scanner scanner = new Scanner(System.in);
     public static void main(String args[]) {
-
+	
+	/* menu inicial*/
         System.out.println("Ocurso - Formando profissionais.");
         System.out.println("Qual a operção deseja fazer? Escolha entre 1 e 7. ");
         System.out.println("1 - Cadastrar professor");
@@ -33,9 +36,14 @@ public class Main {
         System.out.println("5 - Listar curso");
         System.out.println("6 - Listar turma");
         System.out.println("7 - Sair");
+	/* opcao que o usuário irá executar */
         int opcao = scanner.nextInt();
-
+	
+	/* enquanto for verdadeiro execute*/
         while (true) {
+	    /* cada switch representa a opcao de cadastro e exibição dos dados.
+	     * O último contém a opção de sair do programa 
+	     * */
             switch (opcao) {
                 case 1:
                     cadastroProfessores();
@@ -43,8 +51,6 @@ public class Main {
                 break;
                 case 4:
                     listarProfessores();
-                break;
-                case 7:
                 break;
             }
 
@@ -55,8 +61,6 @@ public class Main {
                 case 5:
                     listarCursos();
                 break;
-                case 7:
-                    return;
             }
 
             switch (opcao) {
@@ -77,10 +81,15 @@ public class Main {
             System.out.println("5 - Listar curso");
             System.out.println("6 - Listar turma");
             System.out.println("7 - Sair");
+	    /* caso o usuário queira executar outra opção */
             opcao = scanner.nextInt();
         }
 
     }
+	
+    /* métodos de cadastro
+     * Solicitam os dados, inserem na instância da classe
+     * inserem na lista*/
 
     public static void cadastroProfessores(){
         
@@ -120,6 +129,9 @@ public class Main {
         turmas.add(turma01);
     }
 
+    /*Métodos para listagem
+     *Fazem a busca dos campos através do índice(get(indice)) */
+
     public static void listarProfessores(){
         System.out.println("ID --- Nome --- Email ---- Valor ---- Salário");
         for(int i = 0;i < professores.size();i++){
@@ -128,9 +140,9 @@ public class Main {
     }
 
     public static void listarCursos(){
-        System.out.println("ID --- Nome --- Carga ---- Conteúdo ---- Valor");
+        System.out.println("ID --- Nome --- Carga ---- Conteúdo ---- Valor);
         for(int i = 0;i < cursos.size();i++){
-            System.out.println(i + 1 +" - "+ cursos.get(i).getNomeCurso() +" - "+ cursos.get(i).getCargaHoraria() + " - "+ cursos.get(i).getConteudo() +" - "+cursos.get(i).getValorCurso() );
+            System.out.println(i + 1 +" - "+ cursos.get(i).getNomeCurso() +" - "+ cursos.get(i).getCargaHoraria() + " - "+ cursos.get(i).getConteudo() +" - "+cursos.get(i).getValorCurso());
         }
     }
 
