@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.List;
-// import java.util.ArrayList;
 import java.util.Scanner;
 
 /*
@@ -26,18 +25,60 @@ public class Main {
     public static void main(String args[]) {
 
         System.out.println("Ocurso - Formando profissionais.");
+        System.out.println("Qual a operção deseja fazer? Escolha entre 1 e 7. ");
+        System.out.println("1 - Cadastrar professor");
+        System.out.println("2 - Cadastrar curso");
+        System.out.println("3 - Cadastrar turma");
+        System.out.println("4 - Listar professor");
+        System.out.println("5 - Listar curso");
+        System.out.println("6 - Listar turma");
+        System.out.println("7 - Sair");
+        int opcao = scanner.nextInt();
 
-        Professor professor01 = new Professor("Marcilio","marcilio@emal.com",14.7);
-        Professor professor02 = new Professor("Junior","junior@emal.com",20.5);
-        cadastroProfessores();
-        cadastroCursos();
-        cadastroTurmas();
-        
-        professores.add(professor01);
-        professores.add(professor02);
-        listarProfessores();
-        listarCursos();
-        listarTurmas();
+        while (true) {
+            switch (opcao) {
+                case 1:
+                    cadastroProfessores();
+                    opcao = 0;
+                break;
+                case 4:
+                    listarProfessores();
+                break;
+                case 7:
+                break;
+            }
+
+            switch (opcao) {
+                case 2:
+                    cadastroCursos();
+                break;
+                case 5:
+                    listarCursos();
+                break;
+                case 7:
+                    return;
+            }
+
+            switch (opcao) {
+                case 3:
+                    cadastroTurmas();
+                break;
+                case 6:
+                    listarTurmas();
+                break;
+                case 7:
+                    return;
+            }
+            System.out.println("Se deseja fazer outra operação escolha entre 1 e 6. Senão, tecle 7 para sair");
+            System.out.println("1 - Cadastrar professor");
+            System.out.println("2 - Cadastrar curso");
+            System.out.println("3 - Cadastrar turma");
+            System.out.println("4 - Listar professor");
+            System.out.println("5 - Listar curso");
+            System.out.println("6 - Listar turma");
+            System.out.println("7 - Sair");
+            opcao = scanner.nextInt();
+        }
 
     }
 
@@ -89,7 +130,7 @@ public class Main {
     public static void listarCursos(){
         System.out.println("ID --- Nome --- Carga ---- Conteúdo ---- Valor");
         for(int i = 0;i < cursos.size();i++){
-            System.out.println(i + 1 +" - "+ cursos.get(i).getNomeCurso() +" - "+ cursos.get(i).getCargaHoraria() + " - "+ cursos.get(i).getConteudo() +" - "+cursos.get(i).getValorCurso());
+            System.out.println(i + 1 +" - "+ cursos.get(i).getNomeCurso() +" - "+ cursos.get(i).getCargaHoraria() + " - "+ cursos.get(i).getConteudo() +" - "+cursos.get(i).getValorCurso() );
         }
     }
 

@@ -34,7 +34,7 @@ public class Turma {
     /**
      * 
      */
-    private List<Professor> professor;
+    // private ArrayList<Professor> professor;
 
     public String getNomeTurma() {
         return nomeTurma;
@@ -60,8 +60,8 @@ public class Turma {
         this.dataTermino = dataTermino;
     }
 
-    public List<Professor> getProfessor() {
-        return this.professor;
-    }
+    // public ArrayList<Professor> getProfessor() {
+    //     return this.professor;
+    // }
     
 }

@@ -14,7 +14,7 @@ public class Curso {
         this.nomeCurso = nomeCurso;
         this.conteudo = conteudo;
         this.valorCurso = valorCurso;
-        // this.turma = turma;
+        // this.turma = new ArrayList<Turma>();
     }
 
     /**
@@ -40,7 +40,7 @@ public class Curso {
     /**
      * 
      */
-    private Turma turma;
+    // private ArrayList<Turma> turma;
 
     public int getCargaHoraria() {
         return cargaHoraria;
@@ -58,9 +58,9 @@ public class Curso {
         return valorCurso;
     }
 
-    public Turma getTurma() {
-        return turma;
-    }
+    // public ArrayList<Turma> getTurma() {
+    //     return this.turma;
+    // }
 
     public void setCargaHoraria(int cargaHoraria) {
         this.cargaHoraria = cargaHoraria;
