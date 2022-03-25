@@ -40,6 +40,10 @@ public class Curso {
         return this.turma;
     }
 
+    public void setTurma(List<Turma> turma) {
+        this.turma = turma;
+    }
+
     public void setCargaHoraria(int cargaHoraria) {
         this.cargaHoraria = cargaHoraria;
     }

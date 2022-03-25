@@ -42,35 +42,27 @@ public class Main {
 	
 	/* enquanto for verdadeiro execute*/
         while (true) {
-	    /* cada switch representa a opcao de cadastro e exibição dos dados.
-	     * O último contém a opção de sair do programa 
+	    /* switch representa a opcao de cadastro e exibição dos dados.
 	     * */
             switch (opcao) {
                 case 1:
                     cadastroProfessores();
-                    opcao = 0;
-                break;
+                    break;
                 case 4:
                     listarProfessores();
-                break;
-            }
-
-            switch (opcao) {
+                    break;
                 case 2:
                     cadastroCursos();
-                break;
+                    break;
                 case 5:
                     listarCursos();
-                break;
-            }
-
-            switch (opcao) {
+                    break;
                 case 3:
                     cadastroTurmas();
-                break;
+                    break;
                 case 6:
                     listarTurmas();
-                break;
+                    break;
                 case 7:
                     return;
             }
@@ -117,6 +109,7 @@ public class Main {
         Curso curso01 = new Curso(carga,nomeCurso,conteudo,valor);
         cursos.add(curso01);
         curso01.getTurma().addAll(turmas);
+        System.out.println(curso01.getTurma());
     }
 
     public static void cadastroTurmas(){
@@ -130,6 +123,7 @@ public class Main {
         Turma turma01 = new Turma(nomeTurma,inicio,termino);
         turmas.add(turma01);
         turma01.getProfessor().addAll(professores);
+        System.out.println(turma01.getProfessor());
     }
 
     /*Métodos para listagem
