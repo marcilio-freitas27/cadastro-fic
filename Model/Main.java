@@ -2,6 +2,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.lang.IndexOutOfBoundsException;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -27,55 +28,40 @@ public class Main {
     public static Scanner scanner = new Scanner(System.in);
     public static void main(String args[]) {
 	
-	/* menu inicial*/
-        System.out.println("Ocurso - Formando profissionais.");
-        System.out.println("Qual a operção deseja fazer? Escolha entre 1 e 7. ");
-        System.out.println("1 - Cadastrar professor");
-        System.out.println("2 - Cadastrar curso");
-        System.out.println("3 - Cadastrar turma");
-        System.out.println("4 - Listar professor");
-        System.out.println("5 - Listar curso");
-        System.out.println("6 - Listar turma");
-        System.out.println("7 - Sair");
-	/* opcao que o usuário irá executar */
-        int opcao = scanner.nextInt();
-	
 	/* enquanto for verdadeiro execute*/
         while (true) {
 	    /* switch representa a opcao de cadastro e exibição dos dados.
 	     * */
-            switch (opcao) {
+            switch (menuCadastro()) {
                 case 1:
+                /* Por enquanto os cadastros precisar ser feitos um apoós o outro e nessa ordem:
+                * Turma precisa do professor
+                * Curso precisa da turma
+                */
                     cadastroProfessores();
-                    break;
-                case 4:
-                    listarProfessores();
-                    break;
-                case 2:
+                    cadastroTurmas();
                     cadastroCursos();
                     break;
-                case 5:
-                    listarCursos();
+                case 2:
+                    listarProfessores();
                     break;
                 case 3:
-                    cadastroTurmas();
+                    try {
+                        listarCursos();
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println("Lista vazia. Por favor, cadastre pelo menos uma turma." + e);
+                    }
                     break;
-                case 6:
-                    listarTurmas();
+                case 4:
+                    try {
+                        listarTurmas();
+                    } catch (Exception e) {
+                        System.out.println("Lista vazia. Por favor, cadastre pelo menos uma turma." + e);
+                    }
                     break;
-                case 7:
+                case 5:
                     return;
             }
-            System.out.println("Se deseja fazer outra operação escolha entre 1 e 6. Senão, tecle 7 para sair");
-            System.out.println("1 - Cadastrar professor");
-            System.out.println("2 - Cadastrar curso");
-            System.out.println("3 - Cadastrar turma");
-            System.out.println("4 - Listar professor");
-            System.out.println("5 - Listar curso");
-            System.out.println("6 - Listar turma");
-            System.out.println("7 - Sair");
-	    /* caso o usuário queira executar outra opção */
-            opcao = scanner.nextInt();
         }
 
     }
@@ -84,8 +70,22 @@ public class Main {
      * Solicitam os dados, inserem na instância da classe
      * inserem na lista*/
 
+     /* menu inicial*/
+    public static int menuCadastro(){
+        System.out.println("Ocurso - Formando profissionais.");
+        System.out.println("Qual a operção deseja fazer? Escolha entre 1 e 5. ");
+        System.out.println("1 - Cadastrar professor, curso e turma");
+        System.out.println("2 - Listar professor");
+        System.out.println("3 - Listar curso");
+        System.out.println("4 - Listar turma");
+        System.out.println("5 - Sair");
+	/* opcao que o usuário irá executar */
+        int opcao = scanner.nextInt();
+        return opcao;
+    }
+
     public static void cadastroProfessores(){
-        
+        System.out.println("Cadastro do professor.");
         System.out.println("Informe o nome do professor: ");
         String nome = scanner.next();
         System.out.println("Informe o seu email: ");
@@ -94,10 +94,12 @@ public class Main {
         double valor = scanner.nextDouble();
         Professor professor01 = new Professor(nome,email,valor);
         professores.add(professor01);
+        System.out.println("Professor cadastrado com sucesso.");
     }
 
+
     public static void cadastroCursos(){
-        
+        System.out.println("Cadastro do curso.");
         System.out.println("Informe o nome do curso: ");
         String nomeCurso = scanner.next();
         System.out.println("Informe a carga horária: ");
@@ -109,11 +111,11 @@ public class Main {
         Curso curso01 = new Curso(carga,nomeCurso,conteudo,valor);
         cursos.add(curso01);
         curso01.getTurma().addAll(turmas);
-        System.out.println(curso01.getTurma());
+        System.out.println("Curso cadastrado com sucesso.");
     }
 
     public static void cadastroTurmas(){
-        
+        System.out.println("Cadastro da turma.");
         System.out.println("Informe o nome da turma: ");
         String nomeTurma = scanner.next();
         System.out.println("Informe a data de inicio: ");
@@ -123,7 +125,7 @@ public class Main {
         Turma turma01 = new Turma(nomeTurma,inicio,termino);
         turmas.add(turma01);
         turma01.getProfessor().addAll(professores);
-        System.out.println(turma01.getProfessor());
+        System.out.println("Turma cadastrada com sucesso.");
     }
 
     /*Métodos para listagem
