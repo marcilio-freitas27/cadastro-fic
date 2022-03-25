@@ -1,40 +1,23 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDate;
 
-//import java.util.*;
-// import java.time.LocalDate;
-
-/**
- * 
- */
 public class Turma {
 
     /**
      * Default constructor
      */
-    public Turma(String nomeTurma,String dataInicio, String dataTermino) {    
+    public Turma(String nomeTurma,LocalDate dataInicio, LocalDate dataTermino) {    
         this.nomeTurma = nomeTurma;
         this.dataInicio = dataInicio;
         this.dataTermino = dataTermino;
-        // this.professor = new ArrayList<Professor>();
+        this.professor = new ArrayList<Professor>();
     }
 
     private String nomeTurma;
-
-    /**
-     * 
-     */
-    private String dataInicio;
-
-    /**
-     * 
-     */
-    private String dataTermino;
-
-    /**
-     * 
-     */
-    // private ArrayList<Professor> professor;
+    private LocalDate dataInicio;
+    private LocalDate dataTermino;
+    private List<Professor> professor;
 
     public String getNomeTurma() {
         return nomeTurma;
@@ -44,24 +27,24 @@ public class Turma {
         this.nomeTurma = nomeTurma;
     }
 
-    public String getDataInicio() {
+    public LocalDate getDataInicio() {
         return dataInicio;
     }
 
-    public void setDataInicio(String dataInicio) {
+    public void setDataInicio(LocalDate dataInicio) {
         this.dataInicio = dataInicio;
     }
 
-    public String getDataTermino() {
+    public LocalDate getDataTermino() {
         return dataTermino;
     }
 
-    public void setDataTermino(String dataTermino) {
+    public void setDataTermino(LocalDate dataTermino) {
         this.dataTermino = dataTermino;
     }
 
-    // public ArrayList<Professor> getProfessor() {
-    //     return this.professor;
-    // }
+    public List<Professor> getProfessor() {
+        return this.professor;
+    }
     
 }

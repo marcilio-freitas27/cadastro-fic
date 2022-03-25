@@ -1,9 +1,4 @@
 
-//import java.util.*;
-
-/**
- * 
- */
 public class Professor {
 
     /**
@@ -16,15 +11,7 @@ public class Professor {
     }
 
     private String nomeProfessor;
-
-    /**
-     * 
-     */
     private String email;
-
-    /**
-     * 
-     */
     private double valorHoraAula;
 
 

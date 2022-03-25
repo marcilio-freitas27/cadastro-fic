@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -99,8 +100,8 @@ public class Main {
         String email = scanner.next();
         System.out.println("Qual o valo da hora/aula? ");
         double valor = scanner.nextDouble();
-        Professor professor03 = new Professor(nome,email,valor);
-        professores.add(professor03);
+        Professor professor01 = new Professor(nome,email,valor);
+        professores.add(professor01);
     }
 
     public static void cadastroCursos(){
@@ -115,6 +116,7 @@ public class Main {
         double valor = scanner.nextDouble();
         Curso curso01 = new Curso(carga,nomeCurso,conteudo,valor);
         cursos.add(curso01);
+        curso01.getTurma().addAll(turmas);
     }
 
     public static void cadastroTurmas(){
@@ -122,11 +124,12 @@ public class Main {
         System.out.println("Informe o nome da turma: ");
         String nomeTurma = scanner.next();
         System.out.println("Informe a data de inicio: ");
-        String inicio = scanner.next();
+        LocalDate inicio = LocalDate.parse(scanner.next());
         System.out.println("Informe a data de término: ");
-        String termino = scanner.next();
+        LocalDate termino = LocalDate.parse(scanner.next());
         Turma turma01 = new Turma(nomeTurma,inicio,termino);
         turmas.add(turma01);
+        turma01.getProfessor().addAll(professores);
     }
 
     /*Métodos para listagem
@@ -140,16 +143,16 @@ public class Main {
     }
 
     public static void listarCursos(){
-        System.out.println("ID --- Nome --- Carga ---- Conteúdo ---- Valor);
+        System.out.println("ID --- Nome --- Carga ---- Conteúdo ---- Valor --- Turma");
         for(int i = 0;i < cursos.size();i++){
-            System.out.println(i + 1 +" - "+ cursos.get(i).getNomeCurso() +" - "+ cursos.get(i).getCargaHoraria() + " - "+ cursos.get(i).getConteudo() +" - "+cursos.get(i).getValorCurso());
+            System.out.println(i + 1 +" - "+ cursos.get(i).getNomeCurso() +" - "+ cursos.get(i).getCargaHoraria() + " - "+ cursos.get(i).getConteudo() +" - "+cursos.get(i).getValorCurso()+" - "+cursos.get(i).getTurma().get(i).getNomeTurma());
         }
     }
 
     public static void listarTurmas(){
-        System.out.println("ID --- Nome --- Inicio ---- Término");
+        System.out.println("ID --- Nome --- Inicio ---- Término --- Professor");
         for(int i = 0;i < turmas.size();i++){
-            System.out.println(i + 1 +" - "+ turmas.get(i).getNomeTurma() +" - "+ turmas.get(i).getDataInicio() + " - " + turmas.get(i).getDataTermino());
+            System.out.println(i + 1 +" - "+ turmas.get(i).getNomeTurma() +" - "+ turmas.get(i).getDataInicio() + " - " + turmas.get(i).getDataTermino()+ " - " + turmas.get(i).getProfessor().get(i).getNomeProfessor());
         }
     }
 }

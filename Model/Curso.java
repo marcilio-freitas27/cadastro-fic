@@ -1,9 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
 
-//import java.util.*;
-
-/**
- * 
- */
 public class Curso {
 
     /**
@@ -14,33 +11,14 @@ public class Curso {
         this.nomeCurso = nomeCurso;
         this.conteudo = conteudo;
         this.valorCurso = valorCurso;
-        // this.turma = new ArrayList<Turma>();
+        this.turma = new ArrayList<Turma>();
     }
 
-    /**
-     * 
-     */
     private int cargaHoraria;
-
-    /**
-     * 
-     */
     private String nomeCurso;
-
-    /**
-     * 
-     */
     private String conteudo;
-
-    /**
-     * 
-     */
     private double valorCurso;
-
-    /**
-     * 
-     */
-    // private ArrayList<Turma> turma;
+    private List<Turma> turma;
 
     public int getCargaHoraria() {
         return cargaHoraria;
@@ -58,9 +36,9 @@ public class Curso {
         return valorCurso;
     }
 
-    // public ArrayList<Turma> getTurma() {
-    //     return this.turma;
-    // }
+    public List<Turma> getTurma() {
+        return this.turma;
+    }
 
     public void setCargaHoraria(int cargaHoraria) {
         this.cargaHoraria = cargaHoraria;
