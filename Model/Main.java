@@ -1,8 +1,9 @@
+package Model;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.lang.IndexOutOfBoundsException;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -28,61 +29,152 @@ public class Main {
     public static Scanner scanner = new Scanner(System.in);
     public static void main(String args[]) {
 	
+    /* menus de escolha de opções*/
 	/* enquanto for verdadeiro execute*/
         while (true) {
 	    /* switch representa a opcao de cadastro e exibição dos dados.
 	     * */
             switch (menuCadastro()) {
                 case 1:
-                /* Por enquanto os cadastros precisar ser feitos um apoós o outro e nessa ordem:
-                * Turma precisa do professor
-                * Curso precisa da turma
-                */
+                    menuProfessor();
+                    break;
+                case 2:
+                    menuCursos();
+                    break;
+                case 3:
+                    menuTurmas();
+                    break;
+                case 4:
+                    return;
+            }
+        }
+    }
+	public static void menuProfessor(){
+        while (true) {
+            switch(menuCadastroProfessor()){
+                case 1:
                     cadastroProfessores();
-                    cadastroTurmas();
-                    cadastroCursos();
                     break;
                 case 2:
                     listarProfessores();
                     break;
                 case 3:
-                    try {
-                        listarCursos();
-                    } catch (IndexOutOfBoundsException e) {
-                        System.out.println("Lista vazia. Por favor, cadastre pelo menos uma turma." + e);
-                    }
-                    break;
-                case 4:
-                    try {
-                        listarTurmas();
-                    } catch (Exception e) {
-                        System.out.println("Lista vazia. Por favor, cadastre pelo menos uma turma." + e);
-                    }
-                    break;
-                case 5:
                     return;
             }
         }
-
     }
-	
-    /* métodos de cadastro
-     * Solicitam os dados, inserem na instância da classe
-     * inserem na lista*/
+
+    public static void menuCursos(){
+        while (true) {
+            switch(menuCadastroCurso()){
+                case 1:
+                    cadastroCursos();
+                    break;
+                case 2:
+                    listarCursos();
+                    break;
+                case 3:
+                    incluirTurmas();
+                    break;
+                case 4:
+                    return;
+            }
+        }
+    }
+
+    public static void menuTurmas(){
+        while (true) {
+            switch(menuCadastroTurma()){
+                case 1:
+                    cadastroTurmas();
+                    break;
+                case 2:
+                    listarTurmas();
+                    break;
+                case 3:
+                    incluirProfessor();
+                case 4:
+                    return;
+            }
+        }
+    }
+    
+    /* métodos para menus de cadastro.*/
 
      /* menu inicial*/
     public static int menuCadastro(){
         System.out.println("Ocurso - Formando profissionais.");
-        System.out.println("Qual a operção deseja fazer? Escolha entre 1 e 5. ");
-        System.out.println("1 - Cadastrar professor, curso e turma");
-        System.out.println("2 - Listar professor");
-        System.out.println("3 - Listar curso");
-        System.out.println("4 - Listar turma");
-        System.out.println("5 - Sair");
+        System.out.println("Qual a operção deseja fazer? Escolha entre 1 e 4. ");
+        System.out.println("1 - Menu professor");
+        System.out.println("2 - Menu curso");
+        System.out.println("3 - Menu turma");
+        System.out.println("4 - Sair");
 	/* opcao que o usuário irá executar */
         int opcao = scanner.nextInt();
         return opcao;
     }
+
+    public static int menuCadastroProfessor(){
+        System.out.println("Qual a operção deseja fazer? Escolha entre 1 e 3. ");
+        System.out.println("1 - Cadastrar professor");
+        System.out.println("2 - Listar professor");
+        System.out.println("3 - voltar");
+	/* opcao que o usuário irá executar */
+        int opcao = scanner.nextInt();
+        return opcao;
+    }
+
+    public static int menuCadastroCurso(){
+        System.out.println("Qual a operção deseja fazer? Escolha entre 1 e 4. ");
+        System.out.println("1 - Cadastrar curso");
+        System.out.println("2 - Listar cursos");
+        System.out.println("3 - Inserir turma");
+        System.out.println("4 - Voltar");
+	/* opcao que o usuário irá executar */
+        int opcao = scanner.nextInt();
+        return opcao;
+    }
+
+    public static int menuCadastroTurma(){
+        System.out.println("Qual a operção deseja fazer? Escolha entre 1 e 4. ");
+        System.out.println("1 - Cadastrar turma");
+        System.out.println("2 - Listar turmas");
+        System.out.println("3 - Inserir professor");
+        System.out.println("4 - Voltar");
+	/* opcao que o usuário irá executar */
+        int opcao = scanner.nextInt();
+        return opcao;
+    }
+
+    
+
+    /*métodos de incluir professores em turmas e turmas em cursos */
+
+    private static void incluirTurmas() {
+        System.out.println("Qual curso vc deseja incluir uma turma? ");
+        listarCursos();
+        int idCurso = scanner.nextInt();
+        System.out.println("Digite o id da turma: ");
+        int idTurma = scanner.nextInt();
+        if(idTurma > 0 && idTurma <= turmas.size()){
+            cursos.get(idCurso - 1).getTurma().add(turmas.get(idTurma - 1));
+        }
+    }
+
+    private static void incluirProfessor() {
+        System.out.println("Qual turma vc deseja incluir um professor? ");
+        listarTurmas();
+        int idCurso = scanner.nextInt();
+        System.out.println("Digite o id do professor: ");
+        int idProfessor = scanner.nextInt();
+        if(idProfessor > 0 && idProfessor <= professores.size()){
+            turmas.get(idCurso - 1).getProfessor().add(professores.get(idProfessor - 1));
+        }
+    }
+
+    /* métodos de cadastro
+     * Solicitam os dados, inserem na instância da classe
+     * inserem na lista*/
 
     public static void cadastroProfessores(){
         System.out.println("Cadastro do professor.");
@@ -90,7 +182,7 @@ public class Main {
         String nome = scanner.next();
         System.out.println("Informe o seu email: ");
         String email = scanner.next();
-        System.out.println("Qual o valo da hora/aula? ");
+        System.out.println("Qual o valor da hora/aula? ");
         double valor = scanner.nextDouble();
         Professor professor01 = new Professor(nome,email,valor);
         professores.add(professor01);
@@ -104,13 +196,12 @@ public class Main {
         String nomeCurso = scanner.next();
         System.out.println("Informe a carga horária: ");
         int carga = scanner.nextInt();
-        System.out.println("Qual o o conteúdo do curso? ");
+        System.out.println("Qual o conteúdo do curso? ");
         String conteudo = scanner.next();
-        System.out.println("Qual o valo da curso? ");
+        System.out.println("Qual o valor da curso? ");
         double valor = scanner.nextDouble();
         Curso curso01 = new Curso(carga,nomeCurso,conteudo,valor);
         cursos.add(curso01);
-        curso01.getTurma().addAll(turmas);
         System.out.println("Curso cadastrado com sucesso.");
     }
 
@@ -124,7 +215,6 @@ public class Main {
         LocalDate termino = LocalDate.parse(scanner.next());
         Turma turma01 = new Turma(nomeTurma,inicio,termino);
         turmas.add(turma01);
-        turma01.getProfessor().addAll(professores);
         System.out.println("Turma cadastrada com sucesso.");
     }
 
@@ -134,21 +224,36 @@ public class Main {
     public static void listarProfessores(){
         System.out.println("ID --- Nome --- Email ---- Valor ---- Salário");
         for(int i = 0;i < professores.size();i++){
-            System.out.println(i + 1 +" - "+ professores.get(i).getNomeProfessor() +" - "+ professores.get(i).getEmail() + " - " + professores.get(i).getValorHoraAula() + " - " + professores.get(i).calcularSalario(4));
-        }
+            System.out.println(i + 1 +" - "+ professores.get(i).getNomeProfessor() +
+            " - "+ professores.get(i).getEmail() + 
+            " - " + professores.get(i).getValorHoraAula() + 
+            " - " + professores.get(i).calcularSalario(4));
+        }  
     }
 
     public static void listarCursos(){
         System.out.println("ID --- Nome --- Carga ---- Conteúdo ---- Valor --- Turma");
         for(int i = 0;i < cursos.size();i++){
-            System.out.println(i + 1 +" - "+ cursos.get(i).getNomeCurso() +" - "+ cursos.get(i).getCargaHoraria() + " - "+ cursos.get(i).getConteudo() +" - "+cursos.get(i).getValorCurso()+" - "+cursos.get(i).getTurma().get(i).getNomeTurma());
-        }
+            System.out.println(i + 1 + " - "+ cursos.get(i).getNomeCurso() +
+            " - "+ cursos.get(i).getCargaHoraria() + 
+            " - "+ cursos.get(i).getConteudo() + 
+            " - "+cursos.get(i).getValorCurso());
+            for (int j = 0; j < cursos.get(i).getTurma().size(); j++) {
+                System.out.println(" - "+cursos.get(j).getTurma().get(j).getNomeTurma());    
+            }
+            
+        } 
     }
 
     public static void listarTurmas(){
         System.out.println("ID --- Nome --- Inicio ---- Término --- Professor");
         for(int i = 0;i < turmas.size();i++){
-            System.out.println(i + 1 +" - "+ turmas.get(i).getNomeTurma() +" - "+ turmas.get(i).getDataInicio() + " - " + turmas.get(i).getDataTermino()+ " - " + turmas.get(i).getProfessor().get(i).getNomeProfessor());
+            System.out.println(i + 1 + " - " + turmas.get(i).getNomeTurma() + 
+            " - " + turmas.get(i).getDataInicio() + 
+            " - " + turmas.get(i).getDataTermino());
+            for (int j = 0; j < turmas.get(i).getProfessor().size(); j++) {
+                System.out.println(" - " + turmas.get(i).getProfessor().get(i).getNomeProfessor());    
+            }
         }
     }
 }
