@@ -59,6 +59,9 @@ public class Main {
                     listarProfessores();
                     break;
                 case 3:
+                    salarioProfessor();
+                    break;
+                case 4:
                     return;
             }
         }
@@ -109,16 +112,20 @@ public class Main {
         System.out.println("2 - Menu curso");
         System.out.println("3 - Menu turma");
         System.out.println("4 - Sair");
+        System.out.println("Dashboard: ");
+        System.out.println("Turmas " +  " Cursos " + " Professores");
+        System.out.println("     " + turmas.size() + " --- " + cursos.size() + " --- " + professores.size());
 	/* opcao que o usuário irá executar */
         int opcao = scanner.nextInt();
         return opcao;
     }
 
     public static int menuCadastroProfessor(){
-        System.out.println("Qual a operção deseja fazer? Escolha entre 1 e 3. ");
+        System.out.println("Qual a operção deseja fazer? Escolha entre 1 e 4. ");
         System.out.println("1 - Cadastrar professor");
         System.out.println("2 - Listar professor");
-        System.out.println("3 - voltar");
+        System.out.println("3 - Calcular salário do professor");
+        System.out.println("4 - voltar");
 	/* opcao que o usuário irá executar */
         int opcao = scanner.nextInt();
         return opcao;
@@ -155,6 +162,7 @@ public class Main {
         listarCursos();
         int idCurso = scanner.nextInt();
         System.out.println("Digite o id da turma: ");
+        listarTurmas();
         int idTurma = scanner.nextInt();
         if(idTurma > 0 && idTurma <= turmas.size()){
             cursos.get(idCurso - 1).getTurma().add(turmas.get(idTurma - 1));
@@ -166,10 +174,22 @@ public class Main {
         listarTurmas();
         int idCurso = scanner.nextInt();
         System.out.println("Digite o id do professor: ");
+        listarProfessores();
         int idProfessor = scanner.nextInt();
         if(idProfessor > 0 && idProfessor <= professores.size()){
             turmas.get(idCurso - 1).getProfessor().add(professores.get(idProfessor - 1));
         }
+    }
+
+    //exibir e calcular o salário do professor baseado nas horas trabalhadas
+
+    private static void salarioProfessor() {
+        System.out.println("Qual o professor você deseja calcular o salário? ");
+        listarProfessores();
+        int idProfessor = scanner.nextInt();
+        System.out.println("Quantas horas trabalhadas? ");
+        int horas = scanner.nextInt();
+        System.out.println(professores.get(idProfessor - 1).calcularSalario(horas));
     }
 
     /* métodos de cadastro
@@ -179,11 +199,13 @@ public class Main {
     public static void cadastroProfessores(){
         System.out.println("Cadastro do professor.");
         System.out.println("Informe o nome do professor: ");
-        String nome = scanner.next();
+        // consumindo linha
+        scanner.nextLine();
+        String nome = scanner.nextLine();
         System.out.println("Informe o seu email: ");
-        String email = scanner.next();
+        String email = scanner.nextLine();
         System.out.println("Qual o valor da hora/aula? ");
-        double valor = scanner.nextDouble();
+        double valor = Double.parseDouble(scanner.nextLine());
         Professor professor01 = new Professor(nome,email,valor);
         professores.add(professor01);
         System.out.println("Professor cadastrado com sucesso.");
@@ -193,13 +215,14 @@ public class Main {
     public static void cadastroCursos(){
         System.out.println("Cadastro do curso.");
         System.out.println("Informe o nome do curso: ");
-        String nomeCurso = scanner.next();
+        scanner.nextLine();
+        String nomeCurso = scanner.nextLine();
         System.out.println("Informe a carga horária: ");
-        int carga = scanner.nextInt();
+        int carga = Integer.parseInt(scanner.nextLine());
         System.out.println("Qual o conteúdo do curso? ");
-        String conteudo = scanner.next();
-        System.out.println("Qual o valor da curso? ");
-        double valor = scanner.nextDouble();
+        String conteudo = scanner.nextLine();
+        System.out.println("Qual o valor do curso? ");
+        double valor = Double.parseDouble(scanner.nextLine());
         Curso curso01 = new Curso(carga,nomeCurso,conteudo,valor);
         cursos.add(curso01);
         System.out.println("Curso cadastrado com sucesso.");
@@ -208,7 +231,8 @@ public class Main {
     public static void cadastroTurmas(){
         System.out.println("Cadastro da turma.");
         System.out.println("Informe o nome da turma: ");
-        String nomeTurma = scanner.next();
+        scanner.nextLine();
+        String nomeTurma = scanner.nextLine();
         System.out.println("Informe a data de inicio: ");
         LocalDate inicio = LocalDate.parse(scanner.next());
         System.out.println("Informe a data de término: ");
@@ -222,12 +246,11 @@ public class Main {
      *Fazem a busca dos campos através do índice(get(indice)) */
 
     public static void listarProfessores(){
-        System.out.println("ID --- Nome --- Email ---- Valor ---- Salário");
+        System.out.println("ID --- Nome --- Email ---- Valor");
         for(int i = 0;i < professores.size();i++){
-            System.out.println(i + 1 +" - "+ professores.get(i).getNomeProfessor() +
-            " - "+ professores.get(i).getEmail() + 
-            " - " + professores.get(i).getValorHoraAula() + 
-            " - " + professores.get(i).calcularSalario(4));
+            System.out.println(i + 1 +" --- "+ professores.get(i).getNomeProfessor() +
+            " --- "+ professores.get(i).getEmail() + 
+            " --- " + professores.get(i).getValorHoraAula());
         }  
     }
 
@@ -235,11 +258,11 @@ public class Main {
         System.out.println("ID --- Nome --- Carga ---- Conteúdo ---- Valor --- Turma");
         for(int i = 0;i < cursos.size();i++){
             System.out.println(i + 1 + " - "+ cursos.get(i).getNomeCurso() +
-            " - "+ cursos.get(i).getCargaHoraria() + 
-            " - "+ cursos.get(i).getConteudo() + 
-            " - "+cursos.get(i).getValorCurso());
+            " --- "+ cursos.get(i).getCargaHoraria() + 
+            " --- "+ cursos.get(i).getConteudo() + 
+            " ---- "+cursos.get(i).getValorCurso());
             for (int j = 0; j < cursos.get(i).getTurma().size(); j++) {
-                System.out.println(" - "+cursos.get(j).getTurma().get(j).getNomeTurma());    
+                System.out.println(" --- "+cursos.get(j).getTurma().get(j).getNomeTurma());    
             }
             
         } 
@@ -248,11 +271,11 @@ public class Main {
     public static void listarTurmas(){
         System.out.println("ID --- Nome --- Inicio ---- Término --- Professor");
         for(int i = 0;i < turmas.size();i++){
-            System.out.println(i + 1 + " - " + turmas.get(i).getNomeTurma() + 
-            " - " + turmas.get(i).getDataInicio() + 
-            " - " + turmas.get(i).getDataTermino());
+            System.out.println(i + 1 + " --- " + turmas.get(i).getNomeTurma() + 
+            " --- " + turmas.get(i).getDataInicio() + 
+            " --- " + turmas.get(i).getDataTermino());
             for (int j = 0; j < turmas.get(i).getProfessor().size(); j++) {
-                System.out.println(" - " + turmas.get(i).getProfessor().get(i).getNomeProfessor());    
+                System.out.println(" --- " + turmas.get(i).getProfessor().get(i).getNomeProfessor());    
             }
         }
     }
