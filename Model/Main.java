@@ -96,6 +96,7 @@ public class Main {
                     break;
                 case 3:
                     incluirProfessor();
+                    break;
                 case 4:
                     return;
             }
