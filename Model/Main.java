@@ -62,6 +62,9 @@ public class Main {
                     salarioProfessor();
                     break;
                 case 4:
+                    removerProfessor();
+                    break;
+                case 5:
                     return;
             }
         }
@@ -80,6 +83,9 @@ public class Main {
                     incluirTurmas();
                     break;
                 case 4:
+                    removerCurso();
+                    break;
+                case 5:
                     return;
             }
         }
@@ -98,6 +104,9 @@ public class Main {
                     incluirProfessor();
                     break;
                 case 4:
+                    removerTurma();
+                    break;
+                case 5:
                     return;
             }
         }
@@ -126,7 +135,8 @@ public class Main {
         System.out.println("1 - Cadastrar professor");
         System.out.println("2 - Listar professor");
         System.out.println("3 - Calcular salário do professor");
-        System.out.println("4 - voltar");
+        System.out.println("4 - Remover professor");
+        System.out.println("5 - voltar");
 	/* opcao que o usuário irá executar */
         int opcao = scanner.nextInt();
         return opcao;
@@ -137,7 +147,8 @@ public class Main {
         System.out.println("1 - Cadastrar curso");
         System.out.println("2 - Listar cursos");
         System.out.println("3 - Inserir turma");
-        System.out.println("4 - Voltar");
+        System.out.println("4 - Remover curso");
+        System.out.println("5 - Voltar");
 	/* opcao que o usuário irá executar */
         int opcao = scanner.nextInt();
         return opcao;
@@ -148,7 +159,8 @@ public class Main {
         System.out.println("1 - Cadastrar turma");
         System.out.println("2 - Listar turmas");
         System.out.println("3 - Inserir professor");
-        System.out.println("4 - Voltar");
+        System.out.println("4 - Remover turma");
+        System.out.println("5 - Voltar");
 	/* opcao que o usuário irá executar */
         int opcao = scanner.nextInt();
         return opcao;
@@ -278,6 +290,35 @@ public class Main {
             for (int j = 0; j < turmas.get(i).getProfessor().size(); j++) {
                 System.out.println(" --- " + turmas.get(i).getProfessor().get(i).getNomeProfessor());    
             }
+        }
+    }
+
+    /*Métodos para exclusão de dados */
+
+    public static void removerProfessor(){
+        System.out.println("Qual professor você deseja remover?");
+        listarProfessores();
+        int idProfessor = scanner.nextInt();
+        for (int i = 0; i < professores.size(); i++) {
+            professores.remove(idProfessor - 1);
+        }
+    }
+
+    public static void removerTurma(){
+        System.out.println("Qual turma você deseja remover?");
+        listarTurmas();
+        int idTurma = scanner.nextInt();
+        for (int i = 0; i < turmas.size(); i++) {
+            turmas.remove(idTurma - 1);
+        }
+    }
+
+    public static void removerCurso(){
+        System.out.println("Qual curso você deseja remover?");
+        listarCursos();
+        int idCurso = scanner.nextInt();
+        for (int i = 0; i < cursos.size(); i++) {
+            cursos.remove(idCurso - 1);
         }
     }
 }
