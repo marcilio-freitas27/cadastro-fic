@@ -1,8 +1,5 @@
 package Model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Curso {
 
     /**
@@ -13,14 +10,13 @@ public class Curso {
         this.nomeCurso = nomeCurso;
         this.conteudo = conteudo;
         this.valorCurso = valorCurso;
-        this.turma = new ArrayList<Turma>();
     }
 
     private int cargaHoraria;
     private String nomeCurso;
     private String conteudo;
     private double valorCurso;
-    private List<Turma> turma;
+    
 
     public int getCargaHoraria() {
         return cargaHoraria;
@@ -36,14 +32,6 @@ public class Curso {
 
     public double getValorCurso() {
         return valorCurso;
-    }
-
-    public List<Turma> getTurma() {
-        return this.turma;
-    }
-
-    public void setTurma(List<Turma> turma) {
-        this.turma = turma;
     }
 
     public void setCargaHoraria(int cargaHoraria) {

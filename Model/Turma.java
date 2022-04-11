@@ -14,12 +14,14 @@ public class Turma {
         this.dataInicio = dataInicio;
         this.dataTermino = dataTermino;
         this.professor = new ArrayList<Professor>();
+        this.curso = new ArrayList<Curso>();
     }
 
     private String nomeTurma;
     private LocalDate dataInicio;
     private LocalDate dataTermino;
     private List<Professor> professor;
+    private List<Curso> curso;
 
     public String getNomeTurma() {
         return nomeTurma;
@@ -47,6 +49,18 @@ public class Turma {
 
     public List<Professor> getProfessor() {
         return this.professor;
+    }
+
+    public List<Curso> getCurso() {
+        return this.curso;
+    }
+
+    public List<Professor> setProfessor() {
+        return this.professor;
+    }
+
+    public List<Curso> setCurso() {
+        return this.curso;
     }
     
 }

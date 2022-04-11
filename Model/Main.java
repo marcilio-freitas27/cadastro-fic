@@ -80,12 +80,9 @@ public class Main {
                     listarCursos();
                     break;
                 case 3:
-                    incluirTurmas();
-                    break;
-                case 4:
                     removerCurso();
                     break;
-                case 5:
+                case 4:
                     return;
             }
         }
@@ -104,9 +101,12 @@ public class Main {
                     incluirProfessor();
                     break;
                 case 4:
-                    removerTurma();
+                    incluirCurso();
                     break;
                 case 5:
+                    removerTurma();
+                    break;
+                case 6:
                     return;
             }
         }
@@ -146,9 +146,8 @@ public class Main {
         System.out.println("Qual a operção deseja fazer? Escolha entre 1 e 4. ");
         System.out.println("1 - Cadastrar curso");
         System.out.println("2 - Listar cursos");
-        System.out.println("3 - Inserir turma");
-        System.out.println("4 - Remover curso");
-        System.out.println("5 - Voltar");
+        System.out.println("3 - Remover curso");
+        System.out.println("4 - Voltar");
 	/* opcao que o usuário irá executar */
         int opcao = scanner.nextInt();
         return opcao;
@@ -159,8 +158,9 @@ public class Main {
         System.out.println("1 - Cadastrar turma");
         System.out.println("2 - Listar turmas");
         System.out.println("3 - Inserir professor");
-        System.out.println("4 - Remover turma");
-        System.out.println("5 - Voltar");
+        System.out.println("4 - Inserir curso");
+        System.out.println("5 - Remover turma");
+        System.out.println("6 - Voltar");
 	/* opcao que o usuário irá executar */
         int opcao = scanner.nextInt();
         return opcao;
@@ -168,17 +168,17 @@ public class Main {
 
     
 
-    /*métodos de incluir professores em turmas e turmas em cursos */
+    /*métodos de incluir professores em turmas e cursos em turmas */
 
-    private static void incluirTurmas() {
-        System.out.println("Qual curso vc deseja incluir uma turma? ");
-        listarCursos();
-        int idCurso = scanner.nextInt();
-        System.out.println("Digite o id da turma: ");
+    private static void incluirCurso() {
+        System.out.println("Qual turma vc deseja incluir um curso? ");
         listarTurmas();
         int idTurma = scanner.nextInt();
-        if(idTurma > 0 && idTurma <= turmas.size()){
-            cursos.get(idCurso - 1).getTurma().add(turmas.get(idTurma - 1));
+        System.out.println("Digite o id do curso: ");
+        listarCursos();
+        int idCurso = scanner.nextInt();
+        if(idCurso > 0 && idCurso <= cursos.size()){
+            turmas.get(idTurma - 1).getCurso().add(cursos.get(idCurso - 1));
         }
     }
 
@@ -268,27 +268,26 @@ public class Main {
     }
 
     public static void listarCursos(){
-        System.out.println("ID --- Nome --- Carga ---- Conteúdo ---- Valor --- Turma");
+        System.out.println("ID --- Nome --- Carga ---- Conteúdo ---- Valor");
         for(int i = 0;i < cursos.size();i++){
             System.out.println(i + 1 + " - "+ cursos.get(i).getNomeCurso() +
             " --- "+ cursos.get(i).getCargaHoraria() + 
             " --- "+ cursos.get(i).getConteudo() + 
             " ---- "+cursos.get(i).getValorCurso());
-            for (int j = 0; j < cursos.get(i).getTurma().size(); j++) {
-                System.out.println(" --- "+cursos.get(j).getTurma().get(j).getNomeTurma());    
-            }
-            
         } 
     }
 
     public static void listarTurmas(){
-        System.out.println("ID --- Nome --- Inicio ---- Término --- Professor");
+        System.out.println("ID --- Nome --- Inicio ---- Término --- Professor --- Turma");
         for(int i = 0;i < turmas.size();i++){
             System.out.println(i + 1 + " --- " + turmas.get(i).getNomeTurma() + 
             " --- " + turmas.get(i).getDataInicio() + 
             " --- " + turmas.get(i).getDataTermino());
             for (int j = 0; j < turmas.get(i).getProfessor().size(); j++) {
                 System.out.println(" --- " + turmas.get(i).getProfessor().get(i).getNomeProfessor());    
+            }
+            for (int j = 0; j < turmas.get(i).getCurso().size(); j++) {
+                System.out.println(" --- "+turmas.get(j).getCurso().get(j).getNomeCurso());    
             }
         }
     }
